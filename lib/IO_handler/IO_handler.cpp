@@ -28,9 +28,9 @@ IO_handler::IO_handler(float Ts)
 
     // initialize linear characteristics
     m_lc_gz2gz.init(-32767.0f, 32768.0f, -1000.0f * M_PIf / 180.0f, 1000.0f * M_PIf / 180.0f);
-    m_lc_ax2ax.init(1.0f, 0.0f);
-    m_lc_ay2ay.init(1.0f, 0.0f);
-    m_lc_i2u.init(1.0f, 0.0f);
+    m_lc_ax2ax.init(-16270.0f, 16540.0f, -9.81f, 9.81f);
+    m_lc_ay2ay.init(-16840.0f,15960.0f, -9.81f, 9.81f);
+    m_lc_i2u.init(-15.0f, 15.0f,0.0f, 1.0f);
 
     // differentiating low pass filter
     m_fil_diff.differentiatingLowPass1Init(1.0f / (2.0f * M_PIf * 40.0f), Ts);
