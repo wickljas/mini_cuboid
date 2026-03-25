@@ -22,26 +22,26 @@ addpath app/
 %%
 
 % % --- AUFGABE 2.4 ---
-% Ts = 1/1e3;
-% tau = 0.1;
-% 
-% b1 = ;
-% b0 = ;
-% a0 = ;
-% u_kmin1 = 0;
-% y_kmin1 = 0;
-% 
-% t = (0:Ts:1).';
-% u = zeros(size(t));
-% y = zeros(size(t));
-% u(t > 0.1) = 1;
-% for i = 1:length(t)
-%     % y(k) = b1*u(k) + b0*u(k-1) - a0*y(k-1)
-%     y(i) = b1 * u(i) + b0 * u_kmin1 - a0 * y_kmin1;
-%     u_kmin1 = u(i);
-%     y_kmin1 = y(i);
-% end
-% 
-% figure(1)
-% plot(t, [u, y]), grid on
-% xlabel('Time (sec)')
+Ts = 1/1e3;
+tau = 0.1;
+
+b1 = Ts / (Ts + 2*tau);
+b0 = b1;
+a0 = (Ts- 2*tau) / (Ts + 2*tau);
+u_kmin1 = 0;
+y_kmin1 = 0;
+
+t = (0:Ts:1).';
+u = zeros(size(t));
+y = zeros(size(t));
+u(t > 0.1) = 1;
+for i = 1:length(t)
+    % y(k) = b1*u(k) + b0*u(k-1) - a0*y(k-1)
+    y(i) = b1 * u(i) + b0 * u_kmin1 - a0 * y_kmin1;
+    u_kmin1 = u(i);
+    y_kmin1 = y(i);
+end
+
+figure(1)
+plot(t, [u, y]), grid on
+xlabel('Time (sec)')
