@@ -52,7 +52,8 @@ void IO_handler::update(void)
     m_gz = m_lc_gz2gz(m_imu.readGyro_raw(2));
 
     // calculate complementary filter for wheel angle
-    m_phi_bd = atan2f(m_fil_ax.evaluate(m_ax), m_fil_ay.evaluate(m_ay)) - M_PIf / 4.0f + m_tau*m_fil_gz(m_gz);
+    m_phi_bd = atan2f(m_ax,m_ay) - M_PIf / 4.0f;
+    //m_phi_bd = atan2f(m_fil_ax.evaluate(m_ax), m_fil_ay.evaluate(m_ay)) - M_PIf / 4.0f + m_tau*m_fil_gz(m_gz);
 }
 
 float IO_handler::get_phi_fw(void) { return m_phi_fw; }
