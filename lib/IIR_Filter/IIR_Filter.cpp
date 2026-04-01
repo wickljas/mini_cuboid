@@ -13,13 +13,14 @@ IIR_Filter::~IIR_Filter() {}
 // Discretization method: Tustin
 void IIR_Filter::lowPass1Init(float tau, float Ts)
 {
+    // --- AUFGABE 2.4 ---
     // a1 = Ts + 2*tau;
-    // b1 = 2;
-    // b0 = -b1;
+    // b1 = Ts;
+    // b0 = b1;
     // a0 = Ts - 2*tau;
     const float a1 = Ts + 2.0f * tau;
-    const float b1 = 2.0f;
-    const float b0 = -b1;
+    const float b1 = Ts;
+    const float b0 = b1;
     const float a0 = Ts - 2.0f * tau;
 
     m_b1 = b1 / a1;
@@ -52,10 +53,14 @@ void IIR_Filter::differentiatingLowPass1Init(float tau, float Ts)
 
 float IIR_Filter::evaluate(const float u_k)
 {
+    // --- AUFGABE 2.4 ---
+    // update filter output
     const float y_k = m_b1 * u_k + m_b0 * m_u_kmin1 - m_a0 * m_y_kmin1;
 
+    // store values for next iteration
     m_u_kmin1 = u_k;
     m_y_kmin1 = y_k;
+
     return y_k;
 }
 
